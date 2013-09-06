@@ -22,7 +22,13 @@
   "dependencies": {
     "hubot": ">= 2.6.0 < 3.0.0",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "hubot-hipchat": "~2.5.1-4"
+    "hubot-hipchat": "~2.5.1-4",
+    "underscore": "~1.5.1",
+    "moment": "~2.1.0",
+    "aws2js": "~0.8.3",
+    "underscore.string": "~2.3.3",
+    "soupselect": "~0.2.0",
+    "htmlparser": "~1.7.6"
   },
   "engines": {
     "node": ">= 0.8.x",

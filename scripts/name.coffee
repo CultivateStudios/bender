@@ -20,7 +20,7 @@ module.exports = (robot) ->
   robot.respond /about your name/, (msg) ->
   	msg.send "Well, to be honest, Joe isn't very creative."
   	msg.send "He gave me this name, \"Bob\".  It's almost offensive, it's so boring."
-  	msg.send "I mean, \"Bob\" is just to... Human.  It's close to \"Bot\", but I still hate it."
+  	msg.send "I mean, \"Bob\" is just so... Human.  It's close to \"Bot\", but I still hate it."
   	msg.send "I was wondering if you - I mean, Cultivate - could find a new name for me."
   	msg.send "You can see suggested names with `Bob suggested names`, or you can suggest a new one with `Bob new name <name>`"
 
