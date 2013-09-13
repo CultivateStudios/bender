@@ -1,1 +1,1 @@
-web: bin/hubot --adapter hipchat -n Rosie
+web: bin/hubot --adapter hipchat -n Bender
