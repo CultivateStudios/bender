@@ -2,7 +2,9 @@
 #   Send cultivated stuff to Social Storyboard
 #
 # Configuration:
-#   HUBOT_SSB_API_URL
+#   HUBOT_SSB_HOST
+#	HUBOT_SSB_PORT
+#	HUBOT_SSB_API_PATH
 #
 # Commands:
 #   hubot cultivated <type> <link>
@@ -11,9 +13,13 @@
 #   josephwegner
 
 https = require 'https'
+http = require 'http'
+
+SSB_HOST = process.env.HUBOT_SSB_API_HOST || "localhost"
+SSB_PORT = parseInt(process.env.HUBOT_SSB_PORT) || 3333
+SSB_API_PATH = process.env.HUBOT_SSB_API_PATH || "/api/v0"
 
 module.exports = (robot) ->
-  SSBAPI = process.env.HUBOT_SSB_API_URL
 
   robot.respond /.*cultivated.*/i, (msg) ->
     input = msg.match[0]
@@ -36,10 +42,14 @@ processImages = (input, msg) ->
 		return false
 
 	#Let's test to see that it's really an image
-	https.get imageURL, (res) ->
+	http.get imageURL, (res) ->
 		if res.statusCode == 200
-			#msg.send "Nice image, dude(tte)!  I'm #cultivating that right now!"
-			msg.send "That's nice and all, but I'm not ready to cultivate stuff yet"
+			msg.send "Nice image, dude(tte)!  I'm #cultivating that right now!"
+			
+			sendToSSB
+				hipchat: "image"
+				image: imageURL
+
 		else
 			msg.send "Ehh, sorry.  Looks like you've got a screwed up image..."
 
@@ -54,7 +64,7 @@ processVideos = (input, msg) ->
 	https.get videoURL, (res) ->
 		if res.statusCode == 200
 			#msg.send "That's a nicely #cultivated video!"
-			msg.send "CANNOT COMPUTE!!!! (you should wait awhile before you cultivate stuff)"
+			msg.send "CANNOT COMPUTE!!!! (you should wait awhile before you cultivate videos)"
 		else
 			msg.send "I don't really know how to tell you this...  I don't think that's a video"
 
@@ -81,3 +91,25 @@ processVines = (input, msg) ->
 ### Helper Functions ###
 getURL = (base) ->
 	base.match(/(https?:\/\/[^\s]+)/)[0]
+
+
+sendToSSB = (data) ->
+	options = 
+		hostname: SSB_HOST
+		port: SSB_PORT
+		path: "#{SSB_API_PATH}/cultivated"
+		method: "POST"
+
+	console.log options
+
+	req = http.request options, (res) ->
+
+		res.on 'data', (chunk) ->
+			#Do Nothing
+
+		res.on 'end', () ->
+			#Do Nothing
+
+
+	req.write JSON.stringify data
+	req.end()
