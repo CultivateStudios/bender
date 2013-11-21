@@ -42,7 +42,7 @@ processImages = (input, msg) ->
 		return false
 
 	#Let's test to see that it's really an image
-	http.get imageURL, (res) ->
+	https.get imageURL, (res) ->
 		if res.statusCode == 200
 			msg.send "Nice image, dude(tte)!  I'm #cultivating that right now!"
 			

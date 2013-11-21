@@ -1,17 +1,11 @@
 [
 	"redis-brain.coffee", 
 	"shipit.coffee", 
-	"beanstalk.coffee", 
-	"beerme.coffee", 
 	"birthday.coffee", 
 	"bitly.coffee",
 	"calm-down.coffee",
-	"deadline.coffee",
-	"email.coffee",
-	"hello.coffee",
-	"heroku-status.coffee",
 	"lmgtfy.coffee",
-	"scotch.coffee",
 	"spotify.coffee",
-	"wikipedia.coffee"
+	"wikipedia.coffee",
+	"urban.coffee"
 ]
