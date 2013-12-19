@@ -37,8 +37,7 @@ module.exports = (robot) ->
     regex = new RegExp "@#{mw.mention_name}"
 
     robot.hear regex, (msg) ->
-      message = msg.random airdrop
-      msg.send msg.random(airdrop).replace "{mw}", "@#{mw.mention_name}"
+      msg.send msg.random(messages).replace "{mw}", "@#{mw.mention_name}"
   else
     console.log "could not find Mark..  sorry dude"
 
