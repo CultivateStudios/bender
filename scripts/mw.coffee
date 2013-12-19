@@ -29,16 +29,21 @@ messages = [
   "Look at {mw} 's awesome mug (mark)"
 ]
 
+built = false
+
 module.exports = (robot) ->
 
-  mw = robot.brain.userForName "Mark Wierda"
-  console.log mw
+  robot.on 'loaded', () ->
+    if !built
+      mw = robot.brain.userForName "Mark Wierda"
+      console.log mw
 
-  if mw
-    regex = new RegExp "@#{mw.mention_name}"
+      if mw
+        built = true
+        
+        regex = new RegExp "@#{mw.mention_name}"
 
-    robot.hear regex, (msg) ->
-      msg.send msg.random(messages).replace "{mw}", "@#{mw.mention_name}"
-  else
-    console.log "could not find Mark..  sorry dude"
-
+        robot.hear regex, (msg) ->
+          msg.send msg.random(messages).replace "{mw}", "@#{mw.mention_name}"
+      else
+        console.log "could not find Mark..  sorry dude"
