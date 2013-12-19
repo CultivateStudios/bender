@@ -31,7 +31,7 @@ messages = [
 
 module.exports = (robot) ->
 
-  mw = robot.brain.userForName "Mark Weirda"
+  mw = robot.brain.userForName "Mark Wierda"
 
   if mw
     regex = new RegExp "@#{mw.mention_name}"
