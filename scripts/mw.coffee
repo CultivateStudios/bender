@@ -33,14 +33,15 @@ built = false
 
 module.exports = (robot) ->
 
-  robot.on 'loaded', () ->
+  robot.brain.on 'loaded', () ->
+
     if !built
       mw = robot.brain.userForName "Mark Wierda"
       console.log mw
 
       if mw
         built = true
-        
+
         regex = new RegExp "@#{mw.mention_name}"
 
         robot.hear regex, (msg) ->
