@@ -39,8 +39,10 @@ module.exports = (robot) ->
       mw = robot.brain.userForName "Mark Wierda"
       console.log mw
 
-      if mw
+      if mw != null
         built = true
+
+        console.log "Found Mark, binding messages"
 
         regex = new RegExp "@#{mw.mention_name}"
 
