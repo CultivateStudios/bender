@@ -33,11 +33,12 @@ built = false
 
 module.exports = (robot) ->
 
+  console.log(robot.adapter);
+
   robot.brain.on 'loaded', () ->
 
     if !built
       mw = robot.brain.userForName "Mark Wierda"
-      console.log mw
 
       if mw != null
         built = true
