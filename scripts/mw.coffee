@@ -43,11 +43,11 @@ module.exports = (robot) ->
       if mw != null
         built = true
 
-        regex = new RegExp "@#{mw.mention_name}", "g"
+        regex = new RegExp "@#{mw.mention_name}"
 
         console.log "Found Mark, binding messages", regex
 
         robot.hear regex, (msg) ->
-          msg.send msg.random(messages).replace "{mw}", "@#{mw.mention_name}"
+          msg.send msg.random(messages).replace /{mw}/g, "@#{mw.mention_name}"
       else
         console.log "could not find Mark..  sorry dude"
