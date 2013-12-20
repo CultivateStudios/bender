@@ -42,9 +42,9 @@ module.exports = (robot) ->
       if mw != null
         built = true
 
-        console.log "Found Mark, binding messages"
-
         regex = new RegExp "@#{mw.mention_name}"
+
+        console.log "Found Mark, binding messages", regex
 
         robot.hear regex, (msg) ->
           msg.send msg.random(messages).replace "{mw}", "@#{mw.mention_name}"
