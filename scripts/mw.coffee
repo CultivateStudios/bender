@@ -43,7 +43,7 @@ module.exports = (robot) ->
       if mw != null
         built = true
 
-        regex = new RegExp "@#{mw.mention_name}"
+        regex = new RegExp "@#{mw.mention_name}", "g"
 
         console.log "Found Mark, binding messages", regex
 
