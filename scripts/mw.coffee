@@ -20,7 +20,7 @@ messages = [
   "Sweet pants, {mw}",
   "What in the world would we do without {mw}?",
   "ALL HAIL {mw}",
-  "You know how sometimes you just walk in the office door, see {mw} taking too long making a coffee, and you just think, \"Man, {mw} is a real class act}\".  I'm feelin' that right now.",
+  "You know how sometimes you just walk in the office door, see {mw} taking too long making a coffee, and you just think, \"Man, {mw} is a real class act\".  I'm feelin' that right now.",
   "For {mw} 's a jolly good fellow, for {mw} 's a jolly good fellow...  For {mw} 's a jolly good fellow, and nobody can deny!",
   "{mw}, great job on that coffee this morning.  You da man",
   "No matter what Casey says, you *are* good at something, {mw}",
