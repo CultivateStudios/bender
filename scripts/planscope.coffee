@@ -41,8 +41,6 @@ module.exports = (robot) ->
     return false  
 
   robot.hear regex, (msg) ->
-    console.log robot.adapter.connector.getRooms()
-
     if msg.match.length >= 3
       project = msg.match[1]
       task_id = parseInt msg.match[2]
