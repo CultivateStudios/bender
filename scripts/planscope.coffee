@@ -39,6 +39,8 @@ module.exports = (robot) ->
 
 
   robot.hear regex, (msg) ->
+    console.log msg
+    
     if msg.match.length >= 3
       project = msg.match[1]
       task_id = parseInt msg.match[2]
