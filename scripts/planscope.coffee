@@ -70,6 +70,8 @@ module.exports = (robot) ->
           if matched_task
             message = "<img height='16' src='https://planscope.io/assets/dot-logo.png' />&nbsp;&nbsp;<b>#{matched_task.name}</b>"
 
+            console.log rooms, msg.message.room
+
             request
               url: "https://api.hipchat.com/v1/rooms/message?auth_token=#{hipchat_api_key}"
               method: "POST"
