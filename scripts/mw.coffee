@@ -33,8 +33,6 @@ built = false
 
 module.exports = (robot) ->
 
-  console.log(robot.adapter);
-
   robot.brain.on 'loaded', () ->
 
     if !built

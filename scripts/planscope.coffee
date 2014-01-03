@@ -21,6 +21,8 @@ https = require 'https'
 request = require 'request'
 
 module.exports = (robot) ->
+  console.log "pre"
+  console.log robot.adapter.connector.getRooms()
 
   # Enable a looser regex if environment variable is set
   regex = /https:\/\/planscope\.io\/projects\/([^\/]+)\/tasks\/([0-9]+)/i
@@ -39,8 +41,7 @@ module.exports = (robot) ->
 
 
   robot.hear regex, (msg) ->
-    console.log msg
-    
+
     if msg.match.length >= 3
       project = msg.match[1]
       task_id = parseInt msg.match[2]
