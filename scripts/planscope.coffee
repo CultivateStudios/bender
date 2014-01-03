@@ -20,7 +20,10 @@
 https = require 'https'
 request = require 'request'
 
+
+
 module.exports = (robot) ->
+  rooms = {}
 
   # Enable a looser regex if environment variable is set
   regex = /https:\/\/planscope\.io\/projects\/([^\/]+)\/tasks\/([0-9]+)/i
@@ -36,7 +39,6 @@ module.exports = (robot) ->
   else
     console.log "Missing HUBOT_PLANSCOPE_API_KEY"
     return false  
-
 
   robot.hear regex, (msg) ->
     console.log robot.adapter.connector.getRooms()
@@ -75,12 +77,38 @@ module.exports = (robot) ->
               method: "POST"
               form:
                 from: "Planscope"
-                room_id: msg.message.room
+                room_id: rooms[msg.message.room]
                 message_format: "html"
                 color: "purple"
                 message: message
             , (error, response, body) ->
               console.log error, body
+
+
+  updateRooms = () ->
+    https.get "https://api.hipchat.com/v1/rooms/list?auth_token=#{hipchat_api_key}", (res) ->
+      data = ""
+
+      res.on 'data', (chunk) ->
+        data += chunk
+
+      res.on 'end', () ->
+        try
+          retrieved_rooms = JSON.parse data
+        catch e
+          console.log "invalid JSON from hipchat"
+          return false
+
+        new_rooms = {}
+
+        for room in retrieved_rooms.rooms
+          new_rooms[room.name] = room.room_id
+
+        rooms = new_rooms
+
+  setInterval updateRooms, 10 * 60 * 1000
+  updateRooms()
+        
 
             
 
