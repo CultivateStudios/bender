@@ -48,7 +48,7 @@ module.exports = (robot) ->
         match = data.match /<meta property="og:image" content="([^"]+)"\/>/ 
 
         if match.length == 2
-          message = "<img src='#{match[1]}' width='200' />"
+          message = "<img src='#{match[1]}' width='400' />"
           console.log message
 
           request
