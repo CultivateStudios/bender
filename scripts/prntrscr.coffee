@@ -55,7 +55,7 @@ module.exports = (robot) ->
             url: "https://api.hipchat.com/v1/rooms/message?auth_token=#{hipchat_api_key}"
             method: "POST"
             form:
-              from: "Planscope"
+              from: "LightShot"
               room_id: rooms[msg.message.room]
               message_format: "html"
               color: "gray"
