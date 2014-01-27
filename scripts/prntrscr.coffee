@@ -40,7 +40,7 @@ module.exports = (robot) ->
 
     url = msg.match[0];
 
-    if url != last_url || (Date.now() - last_url_time) > 5000)
+    if url != last_url || (Date.now() - last_url_time) > 5000
 
       http.get url, (res) ->
 
