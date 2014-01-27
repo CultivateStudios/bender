@@ -19,8 +19,6 @@ https = require 'https'
 http = require 'http'
 request = require 'request'
 
-
-
 module.exports = (robot) ->
   rooms = {}
 
