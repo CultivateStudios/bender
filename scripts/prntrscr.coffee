@@ -24,6 +24,9 @@ request = require 'request'
 module.exports = (robot) ->
   rooms = {}
 
+  last_url = "";
+  last_url_time = 0;
+
   # Enable a looser regex if environment variable is set
   regex = /http:\/\/prntscr\.com\/[0-9A-Za-z]+/i
 
@@ -37,31 +40,36 @@ module.exports = (robot) ->
 
     url = msg.match[0];
 
-    http.get url, (res) ->
+    if url != last_url || (Date.now() - last_url_time) > 5000)
 
-      data = ""
+      http.get url, (res) ->
 
-      res.on 'data', (chunk) ->
-        data += chunk
+        data = ""
 
-      res.on 'end', () ->
-        match = data.match /<meta property="og:image" content="([^"]+)"\/>/ 
+        res.on 'data', (chunk) ->
+          data += chunk
 
-        if match.length == 2
-          message = "<a href='#{url}'><img src='#{match[1]}' width='400' /></a>"
-          console.log message
+        res.on 'end', () ->
+          match = data.match /<meta property="og:image" content="([^"]+)"\/>/ 
 
-          request
-            url: "https://api.hipchat.com/v1/rooms/message?auth_token=#{hipchat_api_key}"
-            method: "POST"
-            form:
-              from: "LightShot"
-              room_id: rooms[msg.message.room]
-              message_format: "html"
-              color: "gray"
-              message: message
-          , (error, response, body) ->
-            console.log error, body
+          if match.length == 2
+            message = "<a href='#{url}'><img src='#{match[1]}' width='400' /></a>"
+
+            request
+              url: "https://api.hipchat.com/v1/rooms/message?auth_token=#{hipchat_api_key}"
+              method: "POST"
+              form:
+                from: "LightShot"
+                room_id: rooms[msg.message.room]
+                message_format: "html"
+                color: "gray"
+                message: message
+            , (error, response, body) ->
+              console.log error, body
+
+              if !error
+                last_url = url
+                last_url_time = Date.now()
 
 
   updateRooms = () ->
